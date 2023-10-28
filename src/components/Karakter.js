@@ -1,1 +1,0 @@
-// Karakter bileşeniniz buraya gelecek

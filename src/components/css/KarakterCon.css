@@ -1,0 +1,11 @@
+.container {
+  background: red;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.karakter {
+  background-color: yellow;
+}
