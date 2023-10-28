@@ -1,11 +1,16 @@
 // Karakter bileşeniniz buraya gelecek
 import styled from "styled-components";
 
-import React from "react";
+import React, { useState } from "react";
 
 function KarakterCon(props) {
   const { data } = props;
-  console.log(data);
+
+  const [toggleState, setToggleState] = useState(false);
+  const ToggleMenu = () => {
+    setToggleState(!toggleState);
+  };
+  // console.log(data);
 
   const KarContainer = styled.div`
     background: linear-gradient(
@@ -16,16 +21,18 @@ function KarakterCon(props) {
     );
     display: flex;
     flex-direction: column;
+
     width: 50%;
     margin: 0 auto;
     opacity: 0.92;
   `;
 
   const Karakterler = styled.div`
-  border: 3px solid rgba(248, 232, 55, 0.662);
+    border: 3px solid rgba(248, 232, 55, 0.662);
     padding: 0.5rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction : column ;
+    align-items:flex-start ;
     font-size: 1.3rem;
     margin: 0.8rem 0.2rem;
     border-radius : .2rem;
@@ -52,12 +59,36 @@ function KarakterCon(props) {
     padding: 0.2rem;
     border-radius: 0.2rem;
   `;
-  console.log(data.name);
+
+  const UnOrderedList = styled.ul`
+    list-style-type: none;
+    padding: 0;
+  `;
+
+  const ListItems = styled.li`
+    text-align: start;
+    font-size: 1.7rem;
+  `;
+  // console.log(data.name);
   const ListeKarakterler = data.map((element) => {
     return (
       <Karakterler>
-        <KarakterNames>{element.name}</KarakterNames>
-        {/* <KarakterBirth>{element.birth_year}</KarakterBirth> */}
+        <KarakterNames onClick={ToggleMenu}>{element.name}</KarakterNames>
+
+        {toggleState && (
+          <UnOrderedList>
+            <ListItems>Gender : {element.gender.toUpperCase()}</ListItems>
+            <ListItems>Height : {element.height}</ListItems>
+            <ListItems>Mass : {element.mass} </ListItems>
+            <ListItems>Birth Year : {element.birth_year}</ListItems>
+            <ListItems>Eye Color : {element.eye_color}</ListItems>
+            <ListItems>Hair Color : {element.hair_color}</ListItems>
+            <ListItems>Skin Color : {element.skin_color}</ListItems>
+            <UnOrderedList onClick={ToggleMenu}>
+              <ListItems>{element.films}</ListItems>
+            </UnOrderedList>
+          </UnOrderedList>
+        )}
       </Karakterler>
     );
   });
