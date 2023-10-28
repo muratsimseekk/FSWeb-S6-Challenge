@@ -7,11 +7,16 @@ function KarakterCon(props) {
   const { data } = props;
 
   const [toggleState, setToggleState] = useState(false);
+  const [toggleDurum, setToggleDurum] = useState(false);
+
   const ToggleMenu = () => {
     setToggleState(!toggleState);
   };
   // console.log(data);
 
+  const ToggleFilm = () => {
+    setToggleDurum(!toggleDurum);
+  };
   const KarContainer = styled.div`
     background: linear-gradient(
       177deg,
@@ -69,11 +74,17 @@ function KarakterCon(props) {
     text-align: start;
     font-size: 1.7rem;
   `;
+
+  const Label = styled.label`
+    font-size: 1.3rem;
+  `;
   // console.log(data.name);
-  const ListeKarakterler = data.map((element) => {
+  const ListeKarakterler = data.map((element, index) => {
     return (
       <Karakterler>
-        <KarakterNames onClick={ToggleMenu}>{element.name}</KarakterNames>
+        <KarakterNames key={index} onClick={ToggleMenu}>
+          {element.name}
+        </KarakterNames>
 
         {toggleState && (
           <UnOrderedList>
@@ -84,8 +95,12 @@ function KarakterCon(props) {
             <ListItems>Eye Color : {element.eye_color}</ListItems>
             <ListItems>Hair Color : {element.hair_color}</ListItems>
             <ListItems>Skin Color : {element.skin_color}</ListItems>
-            <UnOrderedList onClick={ToggleMenu}>
-              <ListItems>{element.films}</ListItems>
+
+            <UnOrderedList onClick={ToggleFilm}>
+              <Label>Appears in {element.films.length} films</Label>
+              {element.films.map((film, no) => {
+                return <ListItems key={no}>{film}</ListItems>;
+              })}
             </UnOrderedList>
           </UnOrderedList>
         )}
