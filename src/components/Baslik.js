@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/Baslik.css";
+
 function Baslik() {
   return (
     <div className="baslik">

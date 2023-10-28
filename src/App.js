@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Baslik from "./components/Baslik";
 import KarakterCon from "./components/KarakterCon";
+import Footer from "./components/Footer";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -13,10 +14,10 @@ const App = () => {
 
   const [datalar, setDatalar] = useState();
 
+  const site = "https://swapi.dev/api/people/?page";
+
   const getData = () => {
-    axios
-      .get("https://swapi.dev/api/people/?page")
-      .then((resp) => setDatalar(resp.data));
+    axios.get(site).then((resp) => setDatalar(resp.data));
   };
   // getData();
   useEffect(() => {
@@ -31,6 +32,7 @@ const App = () => {
       <div className="App">
         <Baslik />
         <KarakterCon data={datalar} />
+        <Footer data={datalar} />
       </div>
     );
   }
