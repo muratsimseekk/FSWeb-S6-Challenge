@@ -8,16 +8,16 @@ function KarakterCon(props) {
 
   const [toggleState, setToggleState] = useState(null);
 
-  // const [toggleDurum, setToggleDurum] = useState(false);
-
   const ToggleMenu = (index) => {
-    setToggleState(toggleState === index ? null : index);
+    if (toggleState === index) {
+      setToggleState(null);
+    } else {
+      setToggleState(index);
+    }
   };
+
   // console.log(data);
 
-  // const ToggleFilm = () => {
-  //   setToggleDurum(!toggleDurum);
-  // };
   const KarContainer = styled.div`
     background: linear-gradient(
       177deg,
@@ -37,33 +37,30 @@ function KarakterCon(props) {
     border: 3px solid rgba(248, 232, 55, 0.662);
     padding: 0.5rem;
     display: flex;
-    flex-direction : column ;
-    align-items:flex-start ;
+    flex-direction: column;
+    align-items: flex-start;
     font-size: 1.3rem;
     margin: 0.8rem 0.2rem;
-    border-radius : .2rem;
+    border-radius: 0.2rem;
     font-family: "Pixelify Sans", sans-serif;
-    
-    
+
     &:hover {
-      background-color : background: rgb(55,78,67);
-      background: linear-gradient(103deg, rgba(55,78,67,1) 0%, rgba(98,161,107,1) 83%, rgba(146,165,149,1) 100%);
-      cursor : pointer;
-      border-radius : .8rem;
-      transition : 0.5s;
+      background-color: rgb(55, 78, 67);
+      background: linear-gradient(
+        103deg,
+        rgba(55, 78, 67, 1) 0%,
+        rgba(98, 161, 107, 1) 83%,
+        rgba(146, 165, 149, 1) 100%
+      );
+      cursor: pointer;
+      border-radius: 0.8rem;
+      transition: 0.5s;
     }
   `;
 
   const KarakterNames = styled.div`
     color: white;
     font-size: 1.7rem;
-  `;
-  const KarakterBirth = styled.div`
-    background-color: brown;
-    margin-right: 1rem;
-    color: white;
-    padding: 0.2rem;
-    border-radius: 0.2rem;
   `;
 
   const UnOrderedList = styled.ul`
