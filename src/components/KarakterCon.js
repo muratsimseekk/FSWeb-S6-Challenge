@@ -6,17 +6,18 @@ import React, { useState } from "react";
 function KarakterCon(props) {
   const { data } = props;
 
-  const [toggleState, setToggleState] = useState(false);
-  const [toggleDurum, setToggleDurum] = useState(false);
+  const [toggleState, setToggleState] = useState(null);
 
-  const ToggleMenu = () => {
-    setToggleState(!toggleState);
+  // const [toggleDurum, setToggleDurum] = useState(false);
+
+  const ToggleMenu = (index) => {
+    setToggleState(toggleState === index ? null : index);
   };
   // console.log(data);
 
-  const ToggleFilm = () => {
-    setToggleDurum(!toggleDurum);
-  };
+  // const ToggleFilm = () => {
+  //   setToggleDurum(!toggleDurum);
+  // };
   const KarContainer = styled.div`
     background: linear-gradient(
       177deg,
@@ -82,11 +83,11 @@ function KarakterCon(props) {
   const ListeKarakterler = data.map((element, index) => {
     return (
       <Karakterler>
-        <KarakterNames key={index} onClick={ToggleMenu}>
+        <KarakterNames key={index} onClick={() => ToggleMenu(index)}>
           {element.name}
         </KarakterNames>
 
-        {toggleState && (
+        {toggleState === index && (
           <UnOrderedList>
             <ListItems>Gender : {element.gender.toUpperCase()}</ListItems>
             <ListItems>Height : {element.height}</ListItems>
@@ -96,7 +97,7 @@ function KarakterCon(props) {
             <ListItems>Hair Color : {element.hair_color}</ListItems>
             <ListItems>Skin Color : {element.skin_color}</ListItems>
 
-            <UnOrderedList onClick={ToggleFilm}>
+            <UnOrderedList>
               <Label>Appears in {element.films.length} films</Label>
               {element.films.map((film, no) => {
                 return <ListItems key={no}>{film}</ListItems>;
